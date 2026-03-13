@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity Management System — BEM</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ════════════ SIDEBAR ════════════ -->
+<aside class="sidebar">
+  <div class="sb-brand">
+    <div class="sb-tag">BEM · AMS v2.0</div>
+    <div class="sb-name">Activity<br>Management<br>System</div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-section">Menu Utama</div>
+    <button class="nav-item active" onclick="go('dashboard',this)">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/></svg>
+      Dashboard Mingguan
+    </button>
+    <button class="nav-item" onclick="go('agenda',this)">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+      Agenda Rapat
+    </button>
+    <button class="nav-item" onclick="go('monitoring',this)">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11 4a1 1 0 10-2 0v4a1 1 0 102 0V7zm-3 1a1 1 0 10-2 0v3a1 1 0 102 0V8zM8 9a1 1 0 00-2 0v2a1 1 0 102 0V9z" clip-rule="evenodd"/></svg>
+      Monitoring Proker
+    </button>
+    <button class="nav-item" onclick="go('program',this)">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
+      Program Kerja
+    </button>
+    <button class="nav-item" onclick="go('laporan',this)">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v6a1 1 0 102 0V8z" clip-rule="evenodd"/></svg>
+      Laporan &amp; LPJ
+    </button>
+    <div class="sb-section" style="margin-top:6px">Pengaturan</div>
+    <button class="nav-item">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
+      Pengaturan
+    </button>
+  </nav>
+  <div class="sb-footer">
+    <div class="user-card">
+      <div class="u-av">AO</div>
+      <div><div class="u-name">Admin BEM</div><div class="u-role">Sekretaris Umum</div></div>
+    </div>
+  </div>
+</aside>
+
+<!-- ════════════ MAIN ════════════ -->
+<main class="main">
+  <div class="topbar">
+    <div class="page-title" id="pageTitle">Dashboard Mingguan</div>
+    <div class="topbar-right">
+      <div class="today-chip">📅 12 Maret 2026 · Minggu ke-3</div>
+      <button class="btn btn-outline btn-sm" onclick="openModal('rapat')">+ Agenda Rapat</button>
+      <button class="btn btn-primary btn-sm" onclick="openModal('proker')">+ Tambah Proker</button>
+    </div>
+  </div>
+
+  <!-- PAGE: DASHBOARD -->
+  <div class="content page active" id="page-dashboard">
+    <div class="g4" style="margin-bottom:22px">
+      <div class="stat-card">
+        <div class="stat-stripe" style="background:var(--accent-light)"></div>
+        <div class="stat-lbl">Total Program Kerja</div>
+        <div class="stat-val">13</div>
+        <div class="stat-note">Tahun 2025/2026</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-stripe" style="background:var(--accent-warm)"></div>
+        <div class="stat-lbl">Sedang Berjalan</div>
+        <div class="stat-val" style="color:var(--accent-warm)">6</div>
+        <div class="stat-note">2 deadline minggu ini</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-stripe" style="background:var(--accent)"></div>
+        <div class="stat-lbl">Selesai</div>
+        <div class="stat-val" style="color:var(--accent)">4</div>
+        <div class="stat-note">LPJ 3 sudah diserahkan</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-stripe" style="background:var(--ink3)"></div>
+        <div class="stat-lbl">Belum Mulai</div>
+        <div class="stat-val" style="color:var(--ink3)">3</div>
+        <div class="stat-note">Dijadwalkan Q2 2026</div>
+      </div>
+    </div>
+
+    <div class="g2" style="margin-bottom:18px">
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">Kegiatan Minggu Ini</div><div class="card-sub">10 – 16 Maret 2026</div></div>
+          <span class="badge b-amber">3 kegiatan</span>
+        </div>
+        <div class="digest-item">
+          <div class="d-dot" style="background:var(--accent-warm)"></div>
+          <div style="flex:1"><div class="d-text">Rapat Evaluasi Program Kerja</div><div class="d-sub">📍 Sekretariat BEM · Kamis 12 Mar · PIC: Ketua BEM</div></div>
+          <span class="badge b-amber">Hari ini</span>
+        </div>
+        <div class="digest-item">
+          <div class="d-dot" style="background:var(--accent-blue)"></div>
+          <div style="flex:1"><div class="d-text">Persiapan Seminar Ekonomi</div><div class="d-sub">📍 Ruang Rapat A · Jumat 13 Mar · PIC: Kemen. Akademik</div></div>
+          <span class="badge b-blue">Besok</span>
+        </div>
+        <div class="digest-item">
+          <div class="d-dot" style="background:var(--accent-red)"></div>
+          <div style="flex:1"><div class="d-text">Pengumpulan Laporan Kegiatan</div><div class="d-sub">📧 Via Email · Minggu 16 Mar · Semua Kementerian</div></div>
+          <span class="badge b-red">Deadline</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">Status Program Kerja</div></div>
+        <div class="card-body">
+          <div style="display:flex;gap:22px;align-items:center;margin-bottom:18px">
+            <svg width="100" height="100" viewBox="0 0 36 36" style="flex-shrink:0">
+              <circle cx="18" cy="18" r="15.5" fill="none" stroke="#EDEAE0" stroke-width="5"/>
+              <circle cx="18" cy="18" r="15.5" fill="none" stroke="#52B788" stroke-width="5" stroke-dasharray="30.8 97.4" stroke-dashoffset="24.35" stroke-linecap="round"/>
+              <circle cx="18" cy="18" r="15.5" fill="none" stroke="#C8861A" stroke-width="5" stroke-dasharray="46.2 97.4" stroke-dashoffset="-6.45" stroke-linecap="round"/>
+              <circle cx="18" cy="18" r="15.5" fill="none" stroke="#AEAAA0" stroke-width="5" stroke-dasharray="23.1 97.4" stroke-dashoffset="-52.65" stroke-linecap="round"/>
+              <text x="18" y="16.5" text-anchor="middle" font-size="6.5" fill="#1A1814" font-family="DM Serif Display,serif" font-weight="700">13</text>
+              <text x="18" y="21" text-anchor="middle" font-size="2.8" fill="#8A8278" font-family="DM Sans,sans-serif">proker</text>
+            </svg>
+            <div style="flex:1">
+              <div class="sl-row"><div class="sl-bar" style="width:60px;background:var(--accent-light)"></div><div class="sl-label">Selesai</div><div class="sl-num">4</div></div>
+              <div class="sl-row"><div class="sl-bar" style="width:90px;background:var(--accent-warm)"></div><div class="sl-label">Berjalan</div><div class="sl-num">6</div></div>
+              <div class="sl-row"><div class="sl-bar" style="width:46px;background:var(--ink3)"></div><div class="sl-label">Belum Mulai</div><div class="sl-num">3</div></div>
+            </div>
+          </div>
+          <table class="tbl">
+            <thead><tr><th>Status</th><th>Jumlah</th><th>Keterangan</th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge b-green">Selesai</span></td><td><strong>4</strong></td><td style="color:var(--ink3);font-size:12px">LPJ sudah diserahkan</td></tr>
+              <tr><td><span class="badge b-amber">Berjalan</span></td><td><strong>6</strong></td><td style="color:var(--ink3);font-size:12px">2 mendekati deadline</td></tr>
+              <tr><td><span class="badge b-gray">Belum Mulai</span></td><td><strong>3</strong></td><td style="color:var(--ink3);font-size:12px">Dijadwalkan Q2 2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Agenda Rapat Terkini</div>
+          <button class="btn btn-outline btn-sm" onclick="go('agenda',document.querySelectorAll('.nav-item')[1])">Lihat Semua →</button>
+        </div>
+        <div style="padding:0 20px">
+          <div class="rapat-item">
+            <div class="rdb" style="background:var(--accent-warm)"><div class="rdb-day">12</div><div class="rdb-mon">Mar</div></div>
+            <div class="r-info"><div class="r-title">Rapat Evaluasi Program Kerja</div><div class="r-meta"><span>👤 Ketua BEM</span><span>🕙 10.00</span><span>📍 Sekretariat</span></div></div>
+            <span class="badge b-amber">Hari ini</span>
+          </div>
+          <div class="rapat-item">
+            <div class="rdb" style="background:var(--accent)"><div class="rdb-day">15</div><div class="rdb-mon">Mar</div></div>
+            <div class="r-info"><div class="r-title">Rapat Persiapan Seminar Ekonomi</div><div class="r-meta"><span>👤 Kemen. Akademik</span><span>🕑 14.00</span><span>📍 Ruang A</span></div></div>
+            <span class="badge b-blue">Terjadwal</span>
+          </div>
+          <div class="rapat-item">
+            <div class="rdb" style="background:var(--accent-light)"><div class="rdb-day">08</div><div class="rdb-mon">Mar</div></div>
+            <div class="r-info"><div class="r-title">Rapat Penerimaan Anggota Baru</div><div class="r-meta"><span>👤 Kemen. SDM</span><span>🕘 09.00</span><span>📍 Aula Utama</span></div></div>
+            <span class="badge b-green">Selesai</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Progres Proker Aktif</div>
+          <button class="btn btn-outline btn-sm" onclick="go('monitoring',document.querySelectorAll('.nav-item')[2])">Detail →</button>
+        </div>
+        <div class="card-body" style="display:flex;flex-direction:column;gap:16px">
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:13px;font-weight:500">Seminar Ekonomi Nasional</span><span class="badge b-amber">Minggu 3</span></div>
+            <div class="prog-row"><div class="prog-wrap"><div class="prog-fill amber" style="width:80%"></div></div><div class="prog-pct">80%</div></div>
+            <div style="font-size:11px;color:var(--ink3);margin-top:3px">Deadline: 20 Mar · PIC: Kemen. Akademik</div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:13px;font-weight:500">Pelatihan Public Speaking</span><span class="badge b-amber">Minggu 2</span></div>
+            <div class="prog-row"><div class="prog-wrap"><div class="prog-fill amber" style="width:50%"></div></div><div class="prog-pct">50%</div></div>
+            <div style="font-size:11px;color:var(--ink3);margin-top:3px">Deadline: 5 Apr · PIC: Kemen. SDM</div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:13px;font-weight:500">Bakti Sosial Desa</span><span class="badge b-red">Terlambat</span></div>
+            <div class="prog-row"><div class="prog-wrap"><div class="prog-fill red" style="width:30%"></div></div><div class="prog-pct">30%</div></div>
+            <div style="font-size:11px;color:var(--accent-red);margin-top:3px">⚠ Melewati deadline 1 Mar 2026</div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:13px;font-weight:500">Festival Seni Mahasiswa</span><span class="badge b-green">Selesai</span></div>
+            <div class="prog-row"><div class="prog-wrap"><div class="prog-fill full" style="width:100%"></div></div><div class="prog-pct">100%</div></div>
+            <div style="font-size:11px;color:var(--ink3);margin-top:3px">Selesai 5 Mar · LPJ sudah diserahkan ✓</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE: AGENDA RAPAT -->
+  <div class="content page" id="page-agenda">
+    <div class="sec-head">Agenda Rapat</div>
+    <div class="card" style="margin-bottom:18px;background:linear-gradient(120deg,#EEF9F3,#F3F1EC)">
+      <div class="card-body" style="padding:16px 22px">
+        <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:12px">Alur Penggunaan Agenda Rapat</div>
+        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px">
+          <div class="alur-step"><div class="alur-num">1</div><div class="alur-text">Admin tambah agenda</div></div>
+          <div class="alur-line"></div>
+          <div class="alur-step"><div class="alur-num">2</div><div class="alur-text">Sistem menyimpan</div></div>
+          <div class="alur-line"></div>
+          <div class="alur-step"><div class="alur-num">3</div><div class="alur-text">Pengurus lihat jadwal</div></div>
+          <div class="alur-line"></div>
+          <div class="alur-step"><div class="alur-num soft">4</div><div class="alur-text">Selesai → ubah status</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Daftar Agenda Rapat</div><div class="card-sub">Maret 2026</div></div>
+        <button class="btn btn-primary btn-sm" onclick="openModal('rapat')">+ Tambah Agenda</button>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>Tanggal</th><th>Judul Rapat</th><th>Penanggung Jawab</th><th>Lokasi</th><th>Waktu</th><th>Status</th><th>Aksi</th></tr></thead>
+        <tbody id="agendaBody">
+          <tr><td>08 Mar 2026</td><td><div class="td-name">Rapat Penerimaan Anggota Baru</div></td><td>Kemen. SDM</td><td>Aula Utama</td><td>09.00 WIB</td><td><span class="badge b-green">Selesai</span></td><td><button class="btn btn-outline btn-sm" onclick="showToast('Status sudah final')">Lihat</button></td></tr>
+          <tr><td>12 Mar 2026</td><td><div class="td-name">Rapat Evaluasi Program Kerja</div></td><td>Ketua BEM</td><td>Sekretariat BEM</td><td>10.00 WIB</td><td><span class="badge b-amber" id="r12">Berlangsung</span></td><td><button class="btn btn-primary btn-sm" id="btn-r12" onclick="selesaikanRapat('r12','btn-r12')">Selesaikan</button></td></tr>
+          <tr><td>15 Mar 2026</td><td><div class="td-name">Rapat Persiapan Seminar Ekonomi</div></td><td>Kemen. Akademik</td><td>Ruang Rapat A</td><td>14.00 WIB</td><td><span class="badge b-blue">Terjadwal</span></td><td><button class="btn btn-outline btn-sm" onclick="showToast('Rapat belum berlangsung')">Lihat</button></td></tr>
+          <tr><td>20 Mar 2026</td><td><div class="td-name">Rapat Koordinasi Akhir Bulan</div></td><td>Sekretaris Umum</td><td>Online / Zoom</td><td>19.00 WIB</td><td><span class="badge b-blue">Terjadwal</span></td><td><button class="btn btn-outline btn-sm" onclick="showToast('Rapat belum berlangsung')">Lihat</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PAGE: MONITORING PROKER -->
+  <div class="content page" id="page-monitoring">
+    <div class="sec-head">Monitoring Program Kerja</div>
+    <div class="pk-banner">
+      <div class="pk-title">Seminar Ekonomi Nasional</div>
+      <div class="pk-meta-row" style="margin-bottom:14px"><span>👤 Kementerian Akademik</span><span>📅 Pelaksanaan: 20 Maret 2026</span><span>🏷 Proker Unggulan</span></div>
+      <div style="font-size:12px;opacity:.7;margin-bottom:6px">Progres keseluruhan</div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <div class="pk-bar-wrap" style="flex:1"><div class="pk-bar-fill" style="width:80%"></div></div>
+        <span style="font-family:'DM Serif Display',serif;font-size:24px;color:#fff">80%</span>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:18px">
+      <div class="card-header"><div class="card-title">Tracking Progres per Minggu</div><span class="badge b-amber">Minggu 3 dari 4</span></div>
+      <div class="card-body">
+        <div class="week-grid">
+          <div class="wk-cell done"><div class="wk-lbl">Minggu 1</div><div class="wk-event">Proposal selesai</div><div class="wk-num">30%</div><div class="wk-bar-wrap"><div class="wk-bar" style="width:30%"></div></div><div style="margin-top:8px"><span class="badge b-green" style="font-size:10.5px">✓ Selesai</span></div></div>
+          <div class="wk-cell done"><div class="wk-lbl">Minggu 2</div><div class="wk-event">Sponsor dicari</div><div class="wk-num">50%</div><div class="wk-bar-wrap"><div class="wk-bar" style="width:50%"></div></div><div style="margin-top:8px"><span class="badge b-green" style="font-size:10.5px">✓ Selesai</span></div></div>
+          <div class="wk-cell now"><div class="wk-lbl">Minggu 3 · Sekarang</div><div class="wk-event">Persiapan acara</div><div class="wk-num">80%</div><div class="wk-bar-wrap"><div class="wk-bar" style="width:80%"></div></div><div style="margin-top:8px"><span class="badge b-amber" style="font-size:10.5px">Berlangsung</span></div></div>
+          <div class="wk-cell"><div class="wk-lbl">Minggu 4</div><div class="wk-event">Pelaksanaan</div><div class="wk-num" style="color:var(--ink3)">100%</div><div class="wk-bar-wrap"><div class="wk-bar" style="width:0%"></div></div><div style="margin-top:8px"><span class="badge b-gray" style="font-size:10.5px">Menunggu</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Semua Program Kerja</div><button class="btn btn-primary btn-sm" onclick="openModal('proker')">+ Tambah Proker</button></div>
+      <table class="tbl">
+        <thead><tr><th>Program Kerja</th><th>Minggu</th><th>Update Terakhir</th><th>Progres</th><th>Deadline</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-name">Seminar Ekonomi Nasional</div><div class="td-meta">Kemen. Akademik</div></td><td>Minggu 3</td><td>Persiapan acara</td><td><div class="prog-row" style="margin:0"><div class="prog-wrap"><div class="prog-fill amber" style="width:80%"></div></div><div class="prog-pct">80%</div></div></td><td>20 Mar 2026</td><td><span class="badge b-amber">Berlangsung</span></td></tr>
+          <tr><td><div class="td-name">Pelatihan Public Speaking</div><div class="td-meta">Kemen. SDM</div></td><td>Minggu 2</td><td>Sponsor dicari</td><td><div class="prog-row" style="margin:0"><div class="prog-wrap"><div class="prog-fill amber" style="width:50%"></div></div><div class="prog-pct">50%</div></div></td><td>5 Apr 2026</td><td><span class="badge b-amber">Berlangsung</span></td></tr>
+          <tr><td><div class="td-name">Bakti Sosial Desa</div><div class="td-meta">Kemen. Sosmas</div></td><td>Minggu 1</td><td>Proposal belum selesai</td><td><div class="prog-row" style="margin:0"><div class="prog-wrap"><div class="prog-fill red" style="width:30%"></div></div><div class="prog-pct">30%</div></div></td><td style="color:var(--accent-red);font-weight:600">1 Mar 2026 ⚠</td><td><span class="badge b-red">Terlambat</span></td></tr>
+          <tr><td><div class="td-name">Festival Seni Mahasiswa</div><div class="td-meta">Kemen. Seni</div></td><td>Minggu 4</td><td>Pelaksanaan selesai</td><td><div class="prog-row" style="margin:0"><div class="prog-wrap"><div class="prog-fill full" style="width:100%"></div></div><div class="prog-pct">100%</div></div></td><td>5 Mar 2026</td><td><span class="badge b-green">Selesai</span></td></tr>
+          <tr><td><div class="td-name">Olimpiade Sains Kampus</div><div class="td-meta">Kemen. Akademik</div></td><td>—</td><td>Belum dimulai</td><td><div class="prog-row" style="margin:0"><div class="prog-wrap"><div class="prog-fill" style="width:0%"></div></div><div class="prog-pct">0%</div></div></td><td>10 Mei 2026</td><td><span class="badge b-gray">Belum Mulai</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PAGE: PROGRAM KERJA -->
+  <div class="content page" id="page-program">
+    <div class="sec-head">Program Kerja</div>
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Daftar Program Kerja BEM 2025/2026</div><div class="card-sub">Total 13 program kerja</div></div>
+        <button class="btn btn-primary btn-sm" onclick="openModal('proker')">+ Tambah Proker</button>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Program Kerja</th><th>Kementerian</th><th>PIC</th><th>Timeline</th><th>Progres</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--ink3)">01</td><td><div class="td-name">Seminar Ekonomi Nasional</div></td><td>Akademik</td><td>Rifai M.</td><td>Mar 2026</td><td><div class="prog-row" style="margin:0"><div class="prog-wrap"><div class="prog-fill amber" style="width:80%"></div></div><div class="prog-pct">80%</div></div></td><td><span class="badge b-amber">Berlangsung</span></td></tr>
+          <tr><td style="color:var(--ink3)">02</td><td><div class="td-name">Pelatihan Public Speaking</div></td><td>SDM</td><td>Siti N.</td><td>Apr 2026</td><td><div class="prog-row" style="margin:0"><div class="prog-wrap"><div class="prog-fill amber" style="width:50%"></div></div><div class="prog-pct">50%</div></div></td><td><span class="badge b-amber">Berlangsung</span></td></tr>
+          <tr><td style="color:var(--ink3)">03</td><td><div class="td-name">Bakti Sosial Desa</div></td><td>Sosmas</td><td>Budi S.</td><td>Mar 2026</td><td><div class="prog-row" style="margin:0"><div class="prog-wrap"><div class="prog-fill red" style="width:30%"></div></div><div class="prog-pct">30%</div></div></td><td><span class="badge b-red">Terlambat</span></td></tr>
+          <tr><td style="color:var(--ink3)">04</td><td><div class="td-name">Festival Seni Mahasiswa</div></td><td>Seni</td><td>Rizki A.</td><td>Mar 2026</td><td><div class="prog-row" style="margin:0"><div class="prog-wrap"><div class="prog-fill full" style="width:100%"></div></div><div class="prog-pct">100%</div></div></td><td><span class="badge b-green">Selesai</span></td></tr>
+          <tr><td style="color:var(--ink3)">05</td><td><div class="td-name">Rapat Koordinasi Bulanan</div></td><td>Sekretariat</td><td>Dewi R.</td><td>Mar 2026</td><td><div class="prog-row" style="margin:0"><div class="prog-wrap"><div class="prog-fill full" style="width:100%"></div></div><div class="prog-pct">100%</div></div></td><td><span class="badge b-green">Selesai</span></td></tr>
+          <tr><td style="color:var(--ink3)">06</td><td><div class="td-name">Olimpiade Sains Kampus</div></td><td>Akademik</td><td>Fajar M.</td><td>Mei 2026</td><td><div class="prog-row" style="margin:0"><div class="prog-wrap"><div class="prog-fill" style="width:0%"></div></div><div class="prog-pct">0%</div></div></td><td><span class="badge b-gray">Belum Mulai</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PAGE: LAPORAN -->
+  <div class="content page" id="page-laporan">
+    <div class="sec-head">Laporan &amp; LPJ</div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab(this,'lpj')">Laporan LPJ</button>
+      <button class="tab" onclick="switchTab(this,'dok')">Dokumentasi</button>
+    </div>
+    <div id="tab-lpj">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Daftar LPJ</div></div>
+        <table class="tbl">
+          <thead><tr><th>Program Kerja</th><th>Kementerian</th><th>PIC</th><th>Tanggal Serah</th><th>Status</th><th>Aksi</th></tr></thead>
+          <tbody>
+            <tr><td><div class="td-name">Festival Seni Mahasiswa</div></td><td>Seni</td><td>Rizki A.</td><td>10 Mar 2026</td><td><span class="badge b-green">Disetujui</span></td><td><button class="btn btn-outline btn-sm" onclick="showToast('Membuka LPJ...')">Buka</button></td></tr>
+            <tr><td><div class="td-name">Rapat Koordinasi Bulanan</div></td><td>Sekretariat</td><td>Dewi R.</td><td>8 Mar 2026</td><td><span class="badge b-green">Disetujui</span></td><td><button class="btn btn-outline btn-sm" onclick="showToast('Membuka LPJ...')">Buka</button></td></tr>
+            <tr><td><div class="td-name">Seminar Ekonomi Nasional</div></td><td>Akademik</td><td>Rifai M.</td><td>—</td><td><span class="badge b-amber">Draft</span></td><td><button class="btn btn-primary btn-sm" onclick="showToast('Membuka editor LPJ...')">Edit</button></td></tr>
+            <tr><td><div class="td-name">Bakti Sosial Desa</div></td><td>Sosmas</td><td>Budi S.</td><td>—</td><td><span class="badge b-red">Belum Selesai</span></td><td><button class="btn btn-outline btn-sm" onclick="showToast('Mengingatkan PIC...')">Ingatkan</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="tab-dok" style="display:none">
+      <div class="g3">
+        <div class="card" style="cursor:pointer" onclick="showToast('Membuka galeri...')">
+          <div style="background:var(--surface2);height:110px;display:flex;align-items:center;justify-content:center;font-size:36px">🎨</div>
+          <div class="card-body"><div style="font-weight:500;font-size:13px">Festival Seni Mahasiswa</div><div style="font-size:11.5px;color:var(--ink3);margin-top:3px">56 foto · 5 Mar 2026</div></div>
+        </div>
+        <div class="card" style="cursor:pointer" onclick="showToast('Membuka galeri...')">
+          <div style="background:var(--surface2);height:110px;display:flex;align-items:center;justify-content:center;font-size:36px">📊</div>
+          <div class="card-body"><div style="font-weight:500;font-size:13px">Seminar Ekonomi</div><div style="font-size:11.5px;color:var(--ink3);margin-top:3px">32 foto · Belum selesai</div></div>
+        </div>
+        <div class="card" style="cursor:pointer;border-style:dashed;background:transparent" onclick="showToast('Upload dokumentasi...')">
+          <div style="height:110px;display:flex;align-items:center;justify-content:center;font-size:36px;color:var(--border)">+</div>
+          <div class="card-body"><div style="font-size:13px;color:var(--ink3)">Tambah Dokumentasi</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- MODAL: AGENDA RAPAT -->
+<div class="overlay" id="modal-rapat">
+  <div class="modal">
+    <div class="modal-hd">
+      <div class="modal-title">Tambah Agenda Rapat</div>
+      <button class="modal-x" onclick="closeModal('rapat')">×</button>
+    </div>
+    <div class="modal-bd">
+      <div style="background:#EEF9F3;border:1px solid #C3E8D5;border-radius:9px;padding:12px 14px;margin-bottom:16px;font-size:12.5px;color:var(--accent)">
+        <strong>Form Tambah Agenda</strong> · Isi semua kolom lalu klik Simpan
+      </div>
+      <div class="fg"><label class="flabel">Judul Rapat</label><input class="finput" type="text" id="f-judul" placeholder="cth. Rapat Evaluasi Program Kerja"></div>
+      <div class="frow">
+        <div class="fg"><label class="flabel">Tanggal</label><input class="finput" type="date" id="f-tgl" value="2026-03-12"></div>
+        <div class="fg"><label class="flabel">Waktu</label><input class="finput" type="time" id="f-jam" value="10:00"></div>
+      </div>
+      <div class="fg">
+        <label class="flabel">Penanggung Jawab</label>
+        <select class="finput" id="f-pic">
+          <option>Ketua BEM</option><option>Wakil Ketua BEM</option><option>Sekretaris Umum</option>
+          <option>Kementerian Akademik</option><option>Kementerian SDM</option>
+          <option>Kementerian Sosmas</option><option>Kementerian Seni</option>
+        </select>
+      </div>
+      <div class="fg"><label class="flabel">Lokasi</label><input class="finput" type="text" id="f-lok" placeholder="cth. Sekretariat BEM / Online Zoom"></div>
+      <div class="fg"><label class="flabel">Catatan Agenda</label><textarea class="finput" rows="3" id="f-notes" placeholder="Poin-poin yang akan dibahas..."></textarea></div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-outline" onclick="closeModal('rapat')">Batal</button>
+      <button class="btn btn-primary" onclick="saveRapat()">Simpan Agenda</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: TAMBAH PROKER -->
+<div class="overlay" id="modal-proker">
+  <div class="modal">
+    <div class="modal-hd">
+      <div class="modal-title">Tambah Program Kerja</div>
+      <button class="modal-x" onclick="closeModal('proker')">×</button>
+    </div>
+    <div class="modal-bd">
+      <div class="fg"><label class="flabel">Nama Program Kerja</label><input class="finput" type="text" placeholder="cth. Seminar Nasional Teknologi"></div>
+      <div class="frow">
+        <div class="fg"><label class="flabel">Kementerian</label><select class="finput"><option>Akademik</option><option>SDM</option><option>Sosmas</option><option>Seni</option><option>Sekretariat</option></select></div>
+        <div class="fg"><label class="flabel">Penanggung Jawab</label><input class="finput" type="text" placeholder="Nama PIC"></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label class="flabel">Tanggal Mulai</label><input class="finput" type="date"></div>
+        <div class="fg"><label class="flabel">Deadline</label><input class="finput" type="date"></div>
+      </div>
+      <div class="fg"><label class="flabel">Target Minggu 1</label><input class="finput" type="text" placeholder="cth. Proposal selesai"></div>
+      <div class="fg"><label class="flabel">Target Minggu 2</label><input class="finput" type="text" placeholder="cth. Sponsor dicari"></div>
+      <div class="fg"><label class="flabel">Deskripsi</label><textarea class="finput" rows="2" placeholder="Tujuan dan gambaran singkat..."></textarea></div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-outline" onclick="closeModal('proker')">Batal</button>
+      <button class="btn btn-primary" onclick="saveProker()">Simpan Proker</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span class="t-icon">✓</span><span id="toastMsg"></span></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
